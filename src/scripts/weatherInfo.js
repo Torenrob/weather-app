@@ -1,4 +1,4 @@
-const oWApi = process.env.openWeatherApi;
+const oWApi = "98cccf764149f70e06a6a27d3efe0a34";
 
 async function getLatLong(query) {
 	let finalQuery = "";
@@ -8,10 +8,18 @@ async function getLatLong(query) {
 		finalQuery = `${finalQuery}+${x}`;
 	});
 	const request = await fetch(`https://geocode.maps.co/search?q=${finalQuery.slice(1)}`);
+
 	const response = await request.json();
 	const lat = response[0].lat;
 	const lon = response[0].lon;
-	const loc = response[0].display_name;
+
+	const locRequest = await fetch(`https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}`);
+	const locResponse = await locRequest.json();
+	console.log(locResponse);
+	const locState = locResponse.address.state;
+	const locCountry = locResponse.address.country;
+	const loc = { locState, locCountry };
+
 	return { lat, lon, loc };
 }
 

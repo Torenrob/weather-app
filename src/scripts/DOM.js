@@ -81,7 +81,8 @@ export async function makeCurrentDisplay(forecastInfo) {
 	let fhw = currentForecast.children[5];
 	let weatherDesc = forecastInfo.results.weather[0].main == "Clouds" ? "Cloudy" : forecastInfo.results.weather[0].main;
 	let icon = `https://openweathermap.org/img/wn/${forecastInfo.results.weather[0].icon}@2x.png`;
-	location.innerText = `${forecastInfo.loc}`;
+	console.log(forecastInfo);
+	location.innerText = `${forecastInfo.results.name}, ${forecastInfo.loc.locState}, ${forecastInfo.loc.locCountry}`;
 
 	temp.innerHTML = `${Math.floor(forecastInfo.results.main.temp)}${forecastInfo.units[0]}`;
 	desc.innerHTML = `${weatherDesc}<img src='${icon}'>`;

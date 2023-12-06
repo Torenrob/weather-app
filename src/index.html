@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <title>Ojo</title>
+   </head>
+
+   <body id="body">
+      <h1 id="currentTime">
+      </h1>
+      <section id="container">
+         <section id="citySelector">
+            <form>
+               <div id="inputWrapper">
+                  <input type="text" placeholder="Location" id="cityInput">
+               </div>
+            </form>
+         </section>
+         <section id="unitSelector">
+            <button class="units options active">&degFarenheit</button>
+            <button class="units options">&degCelsius</button>
+            <button class="units options">Kelvin</button>
+         </section>
+         <section id="currentForecast">
+            <span id="location"></span>
+            <span id="currentDegree">&deg48</span>
+            <span id="weatherDescription">Clear</span>
+            <span id="currentLow">Low: &deg45</span>
+            <span id="currentHigh">High: &deg50</span>
+            <div
+               style="display: flex; flex-direction: column; justify-content:center; font-size: larger; line-height: 30px;">
+               <span id="feelsLike">Feels Like: &deg47</span>
+               <span id="currentHumidity">Humidity: 76%</span>
+               <span id="windSpeed">Wind: 3.44MPH</span>
+            </div>
+            <div>
+               <span id="sunRise">Sunrise</span>
+            </div>
+            <div>
+               <span id="sunSet">Sunset</span>
+            </div>
+         </section>
+
+         <section id="fiveDayForecast">
+            <span style="font-weight: 700; margin-left: 50px;">
+               <button class="active options">Hourly</button>
+               <button class="options">Daily</button>
+               <span class="fiveDayArrow" style="margin-left: 20px;">◄</span>
+               <div class="fiveDayDots"></div>
+               <div class="fiveDayDots"></div>
+               <div class="fiveDayDots"></div>
+               <div class="fiveDayDots"></div>
+               <div class="fiveDayDots"></div>
+               <span class="fiveDayArrow">►</span>
+            </span>
+            <section id="fiveDayDisplays"></section>
+         </section>
+      </section>
+   </body>
+
+</html>

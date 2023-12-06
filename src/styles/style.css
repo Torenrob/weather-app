@@ -1,0 +1,232 @@
+body {
+	height: 100vh;
+	overflow: hidden;
+	color: white;
+}
+
+#container {
+	display: grid;
+	position: relative;
+	grid-template-columns: 1fr 3fr 1fr;
+	grid-template-rows: 0.5fr 2fr 1fr;
+	height: 100vh;
+	padding: 0px 0px 0px 0px;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.459);
+}
+
+#citySelector {
+	grid-area: 1/1/1/1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#unitSelector {
+	grid-area: 1/2/1/2;
+	display: flex;
+	width: 30%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#fiveDayForecast {
+	grid-area: 3/1/3/4;
+	opacity: 0.7;
+	display: grid;
+	grid-template-rows: 0.1fr 1fr;
+}
+
+#fiveDayDisplays {
+	width: 100%;
+	display: flex;
+}
+
+.fiveDayArrow {
+	color: white;
+}
+
+.fiveDayDots {
+	border: #ffffff solid 1px;
+	border-radius: 50%;
+	height: 10px;
+	width: 10px;
+	display: inline-block;
+	margin: 0px 5px;
+}
+
+#backgroundVideo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: black;
+	z-index: 0;
+}
+
+#cityInput {
+	background: none;
+	border: transparent;
+	outline: none;
+	caret-color: white;
+	caret-shape: block;
+	color: white;
+	width: 80%;
+}
+
+#inputWrapper {
+	border-bottom: white solid 1px;
+	border-radius: 2px;
+	padding: 2px;
+	width: 65%;
+}
+
+#magGlass {
+	height: 20px;
+}
+
+#currentForecast {
+	grid-area: 2/2/3/2;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 0.25fr 0.15fr 0.15fr 0.5fr 0.5fr;
+}
+
+#location {
+	font-size: 50px;
+	grid-area: 1/1/1/3;
+	padding-bottom: 15px;
+}
+
+.fiveDayDivs {
+	width: 11vw;
+	height: 90%;
+	background-color: rgba(0, 0, 0, 0.692);
+	border-radius: 50%;
+	margin-left: 26px;
+	margin-top: 12.5px;
+	padding-top: 35px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	font-weight: 600;
+}
+
+.dayOfWeek {
+	grid-area: 1/1/1/3;
+	text-align: center;
+	margin-bottom: 4px;
+}
+
+.dateTime {
+	grid-area: 2/1/2/3;
+	text-align: center;
+	margin-bottom: 4px;
+}
+
+.dayTemp {
+	font-size: 30px;
+	text-align: end;
+}
+
+.dayHighLow {
+	display: flex;
+	flex-direction: column;
+	margin-left: 8px;
+}
+
+.dayDesc {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	grid-area: 4/1/4/3;
+	justify-self: center;
+	text-align: center;
+}
+
+.dayDesc > img {
+	height: 60%;
+}
+
+#currentDegree {
+	font-size: 90px;
+	grid-area: 2/1/4/1;
+	display: flex;
+	padding-right: 40px;
+	justify-content: end;
+}
+
+#currentLow {
+	font-size: 25px;
+	grid-area: 2/2/2/2;
+}
+
+#currentHigh {
+	font-size: 25px;
+	grid-area: 3/2/3/2;
+}
+
+#weatherDescription {
+	font-size: 60px;
+	grid-area: 4/1/4/1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	padding-top: 5%;
+}
+
+.units {
+	width: fit-content !important;
+}
+
+#sunRise {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin-right: 10%;
+}
+
+#sunRise + span {
+	display: flex;
+	flex-direction: column;
+	text-align: end;
+	margin-right: 10%;
+	font-size: large;
+	font-weight: 600;
+}
+
+#sunSet {
+	display: flex;
+	flex-direction: column;
+}
+
+#sunSet + span {
+	font-size: large;
+	font-weight: 600;
+}
+
+.options {
+	border: none;
+	width: 70px;
+	height: 30px;
+	background-color: #ffffff00;
+	color: white;
+	border-radius: 7px;
+}
+
+.options:not(.active):hover {
+	background-color: #ffffff91;
+	color: black;
+}
+
+.active {
+	background-color: blue !important;
+}
+
+#currentTime {
+	position: absolute;
+	z-index: 2;
+	width: 100%;
+	text-align: end;
+	padding-right: 30px;
+}

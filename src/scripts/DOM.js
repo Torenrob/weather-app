@@ -116,9 +116,40 @@ export async function makeFiveDayDisplay(forecastInfo) {
 		const displayDiv = document.createElement("section");
 		displayDiv.classList.add("fiveDayDivs");
 		displayDiv.setAttribute("id", `fiveDay${forecastCount}`);
+		forecastCount++;
 
 		displayDiv.innerHTML = `<span class='dayOfWeek'>${dayOfWeek}</span> <span class='dateTime'>${dateTime}</span> <span class='dayTemp'>${temp}${units}</span> <div class='dayHighLow'><span>H: ${high}${units}</span> <span>L : ${low}${units}</span> </div> <span class='dayDesc'>${description}<img src='${icon}'></span>`;
 
 		fiveDayForecast.childNodes[3].append(displayDiv);
 	});
 }
+
+//Scroll Control for Future Forecast Section
+const scroll = document.getElementById("fiveDayScroll");
+const fiveDayDivs = document.getElementById("fiveDayDisplays");
+scroll.addEventListener("input", (scroll) => {
+	let value = scroll.target.value;
+	fiveDayDivs.style.right = value + "%";
+});
+
+//Control Scroll
+const fiveDayArrow = Array.from(document.getElementsByClassName("fiveDayArrow"));
+fiveDayArrow.forEach((x) => {
+	x.addEventListener("click", () => {
+		let index = fiveDayArrow.indexOf(x);
+		if (index == 0) {
+			scroll.value -= 12.5;
+		}
+		if (index == 1) {
+			scroll.value = Number(scroll.value) + 12.5;
+		}
+
+		if (scroll.value > 75) {
+			scroll.value = 75;
+		} else if (scroll.value < 0) {
+			scroll.value = 0;
+		}
+
+		fiveDayDivs.style.right = scroll.value + "%";
+	});
+});

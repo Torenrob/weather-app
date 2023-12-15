@@ -40,10 +40,14 @@ body {
 #fiveDayDisplays {
 	width: 100%;
 	display: flex;
+	position: relative;
 }
 
 .fiveDayArrow {
 	color: white;
+	align-self: center;
+	padding-bottom: 2.25px;
+	cursor: pointer;
 }
 
 .fiveDayDots {
@@ -53,6 +57,12 @@ body {
 	width: 10px;
 	display: inline-block;
 	margin: 0px 5px;
+}
+
+#fiveDayScroll {
+	accent-color: blue;
+	margin: 0px 5px;
+	cursor: pointer;
 }
 
 #backgroundVideo {

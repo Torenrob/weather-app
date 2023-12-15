@@ -46,15 +46,16 @@
          </section>
 
          <section id="fiveDayForecast">
-            <span style="font-weight: 700; margin-left: 50px;">
+            <span style="font-weight: 700; margin-left: 50px; display: flex;">
                <button class="active options">Hourly</button>
                <button class="options">Daily</button>
                <span class="fiveDayArrow" style="margin-left: 20px;">◄</span>
+               <!-- <div class="fiveDayDots"></div>
                <div class="fiveDayDots"></div>
                <div class="fiveDayDots"></div>
                <div class="fiveDayDots"></div>
-               <div class="fiveDayDots"></div>
-               <div class="fiveDayDots"></div>
+               <div class="fiveDayDots"></div> -->
+               <input type="range" name="fiveDayScroll" id="fiveDayScroll" step="0.5" value="0" min="0" max="75">
                <span class="fiveDayArrow">►</span>
             </span>
             <section id="fiveDayDisplays"></section>

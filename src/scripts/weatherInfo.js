@@ -13,7 +13,7 @@ async function getLatLong(query) {
 	const lat = response[0].lat;
 	const lon = response[0].lon;
 
-	const locRequest = await fetch(`https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}`);
+	const locRequest = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
 	const locResponse = await locRequest.json();
 	console.log(locResponse);
 	const locState = locResponse.address.state;

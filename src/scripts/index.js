@@ -17,6 +17,7 @@ navigator.geolocation.getCurrentPosition(async (x) => {
 });
 
 export async function setLocation(location) {
+	console.log(location);
 	let forecasts;
 	forecasts = await weather.getForecasts(location);
 	let fiveDay = forecasts[Object.keys(forecasts)[0]];

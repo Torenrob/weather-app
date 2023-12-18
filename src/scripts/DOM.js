@@ -155,11 +155,3 @@ fiveDayArrow.forEach((x) => {
 		fiveDayDivs.style.right = scroll.value + "%";
 	});
 });
-
-//Loader
-document.addEventListener("DOMContentLoaded", loader());
-function loader() {
-	setTimeout(function () {
-		document.querySelector(".loader-wrapper").style.visibility = "hidden";
-	}, 2000);
-}

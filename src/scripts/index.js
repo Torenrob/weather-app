@@ -17,7 +17,9 @@ navigator.geolocation.getCurrentPosition(async (x) => {
 });
 
 export async function setLocation(location) {
-	console.log(location);
+	if (!location) {
+		location = "Atlanta, Georgia";
+	}
 	let forecasts;
 	forecasts = await weather.getForecasts(location);
 	let fiveDay = forecasts[Object.keys(forecasts)[0]];
@@ -26,4 +28,5 @@ export async function setLocation(location) {
 	DOM.makeGifBackground(`${current.results.weather[0].main}`);
 	DOM.makeFiveDayDisplay(fiveDay);
 	DOM.makeCurrentDisplay(current);
+	document.querySelector(".loader-wrapper").style.visibility = "hidden";
 }

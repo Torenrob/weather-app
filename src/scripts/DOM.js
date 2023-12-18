@@ -20,8 +20,9 @@ video.setAttribute("autoplay", "");
 video.setAttribute("loop", "");
 video.setAttribute("id", "backgroundVideo");
 body.append(video);
-const magGlass = new Image();
-magGlass.src = glass;
+const magGlass = document.createElement("input");
+magGlass.setAttribute("type", "image");
+magGlass.setAttribute("src", glass);
 magGlass.setAttribute("id", "magGlass");
 inputWrapper.append(magGlass);
 
@@ -34,6 +35,7 @@ let sunsetTime = document.createElement("span");
 sunset.append(sunsetTime);
 
 citySelector.addEventListener("submit", (x) => {
+	document.querySelector(".loader-wrapper").style.visibility = "visible";
 	let cityInput = x.target[0].value;
 	setLocation(cityInput);
 	x.preventDefault();
@@ -153,3 +155,11 @@ fiveDayArrow.forEach((x) => {
 		fiveDayDivs.style.right = scroll.value + "%";
 	});
 });
+
+//Loader
+document.addEventListener("DOMContentLoaded", loader());
+function loader() {
+	setTimeout(function () {
+		document.querySelector(".loader-wrapper").style.visibility = "hidden";
+	}, 2000);
+}

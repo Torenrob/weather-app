@@ -20,6 +20,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 2;
 }
 
 #unitSelector {
@@ -28,6 +29,7 @@ body {
 	width: 30%;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 2;
 }
 
 #fiveDayForecast {
@@ -41,6 +43,7 @@ body {
 	width: 100%;
 	display: flex;
 	position: relative;
+	justify-content: space-around;
 }
 
 .fiveDayArrow {
@@ -251,7 +254,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 1000;
+	z-index: 1;
 }
 
 .loader {
@@ -271,7 +274,3 @@ body {
 		transform: rotate(360deg);
 	}
 }
-
-/*.content {
-	display: none; /* Initially hide content
-}*/

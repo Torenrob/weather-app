@@ -26,6 +26,8 @@ magGlass.setAttribute("src", glass);
 magGlass.setAttribute("id", "magGlass");
 inputWrapper.append(magGlass);
 
+let currentLocation;
+let selectedUnit;
 let sunrise = document.getElementById("sunRise").parentElement;
 let sunset = document.getElementById("sunSet").parentElement;
 let sunriseTime = document.createElement("span");
@@ -35,9 +37,8 @@ let sunsetTime = document.createElement("span");
 sunset.append(sunsetTime);
 
 citySelector.addEventListener("submit", (x) => {
-	document.querySelector(".loader-wrapper").style.visibility = "visible";
 	let cityInput = x.target[0].value;
-	setLocation(cityInput);
+	setLocation(cityInput, selectedUnit);
 	x.preventDefault();
 	x.target.reset();
 });
@@ -84,7 +85,8 @@ export async function makeCurrentDisplay(forecastInfo) {
 	let weatherDesc = forecastInfo.results.weather[0].main == "Clouds" ? "Cloudy" : forecastInfo.results.weather[0].main;
 	let icon = `https://openweathermap.org/img/wn/${forecastInfo.results.weather[0].icon}@2x.png`;
 	console.log(forecastInfo);
-	location.innerText = `${forecastInfo.results.name}, ${forecastInfo.loc.locState}, ${forecastInfo.loc.locCountry}`;
+	currentLocation = `${forecastInfo.results.name}, ${forecastInfo.loc.locState}, ${forecastInfo.loc.locCountry}`;
+	location.innerText = currentLocation;
 
 	temp.innerHTML = `${Math.floor(forecastInfo.results.main.temp)}${forecastInfo.units[0]}`;
 	desc.innerHTML = `${weatherDesc}<img src='${icon}'>`;
@@ -118,6 +120,11 @@ export async function makeFiveDayDisplay(forecastInfo) {
 		const displayDiv = document.createElement("section");
 		displayDiv.classList.add("fiveDayDivs");
 		displayDiv.setAttribute("id", `fiveDay${forecastCount}`);
+		if (forecastCount % 8 != 0) {
+			displayDiv.classList.add("hourly");
+		} else {
+			displayDiv.classList.add("daily");
+		}
 		forecastCount++;
 
 		displayDiv.innerHTML = `<span class='dayOfWeek'>${dayOfWeek}</span> <span class='dateTime'>${dateTime}</span> <span class='dayTemp'>${temp}${units}</span> <div class='dayHighLow'><span>H: ${high}${units}</span> <span>L : ${low}${units}</span> </div> <span class='dayDesc'>${description}<img src='${icon}'></span>`;
@@ -146,12 +153,67 @@ fiveDayArrow.forEach((x) => {
 			scroll.value = Number(scroll.value) + 12.5;
 		}
 
-		if (scroll.value > 75) {
-			scroll.value = 75;
+		if (scroll.value > 80) {
+			scroll.value = 80;
 		} else if (scroll.value < 0) {
 			scroll.value = 0;
 		}
 
 		fiveDayDivs.style.right = scroll.value + "%";
+	});
+});
+
+const options = document.getElementsByClassName("options");
+
+//Hourly Daily Forecast Switch Control
+Array.from(options).forEach((x) => {
+	x.addEventListener("click", (option) => {
+		if (option.target.textContent == "Daily") {
+			Array.from(document.getElementsByClassName("hourly")).forEach((div) => {
+				div.style.display = "none";
+			});
+			options[3].classList.remove("active");
+			options[4].classList.add("active");
+			fiveDayArrow.forEach((arrow) => (arrow.style.visibility = "hidden"));
+			scroll.style.visibility = "hidden";
+		} else if (option.target.textContent == "Hourly") {
+			Array.from(document.getElementsByClassName("hourly")).forEach((div) => {
+				div.style.display = "grid";
+			});
+			options[4].classList.remove("active");
+			options[3].classList.add("active");
+			fiveDayArrow.forEach((arrow) => (arrow.style.visibility = "visible"));
+			scroll.style.visibility = "visible";
+		}
+	});
+});
+
+//Unit Swicth Control
+Array.from(options).forEach((x) => {
+	x.addEventListener("click", (option) => {
+		option = option.target.textContent;
+		switch (option) {
+			case "°Farenheit":
+				setLocation(currentLocation, "imperial");
+				options[0].classList.add("active");
+				options[1].classList.remove("active");
+				options[2].classList.remove("active");
+				selectedUnit = "imperial";
+				break;
+			case "°Celsius":
+				options[0].classList.remove("active");
+				options[1].classList.add("active");
+				options[2].classList.remove("active");
+				setLocation(currentLocation, "metric");
+				selectedUnit = "metric";
+				break;
+			case "Kelvin":
+				options[0].classList.remove("active");
+				options[1].classList.remove("active");
+				options[2].classList.add("active");
+				setLocation(currentLocation, "standard");
+				selectedUnit = "standard";
+				break;
+		}
 	});
 });

@@ -16,17 +16,25 @@ navigator.geolocation.getCurrentPosition(async (x) => {
 	setLocation(`${cityNameResponse[0].name}, ${cityNameResponse[0].state}`);
 });
 
-export async function setLocation(location) {
+export async function setLocation(location, units) {
+	document.querySelector(".loader-wrapper").style.visibility = "visible";
 	if (!location) {
 		location = "Atlanta, Georgia";
 	}
 	let forecasts;
-	forecasts = await weather.getForecasts(location);
+	try {
+		forecasts = await weather.getForecasts(location, units);
+	} catch {
+		alert("Location not found. Try Again.");
+		document.querySelector(".loader-wrapper").style.visibility = "hidden";
+	}
 	let fiveDay = forecasts[Object.keys(forecasts)[0]];
 	let current = forecasts[Object.keys(forecasts)[1]];
 
 	DOM.makeGifBackground(`${current.results.weather[0].main}`);
 	DOM.makeFiveDayDisplay(fiveDay);
 	DOM.makeCurrentDisplay(current);
-	document.querySelector(".loader-wrapper").style.visibility = "hidden";
+	setTimeout((x) => {
+		document.querySelector(".loader-wrapper").style.visibility = "hidden";
+	}, 500);
 }

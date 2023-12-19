@@ -46,9 +46,9 @@ async function getWeatherInfo(query, forecast, units = "imperial") {
 	return { results, units, loc };
 }
 
-export async function getForecasts(query) {
-	const fiveDay = await getWeatherInfo(query, "forecast");
-	const current = await getWeatherInfo(query, "weather");
+export async function getForecasts(query, units) {
+	const fiveDay = await getWeatherInfo(query, "forecast", units);
+	const current = await getWeatherInfo(query, "weather", units);
 
 	return { fiveDay, current };
 }

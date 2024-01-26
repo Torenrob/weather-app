@@ -22,12 +22,8 @@ export async function setLocation(location, units) {
 		location = "Atlanta, Georgia";
 	}
 	let forecasts;
-	try {
-		forecasts = await weather.getForecasts(location, units);
-	} catch {
-		alert("Location not found. Try Again.");
-		document.querySelector(".loader-wrapper").style.visibility = "hidden";
-	}
+	forecasts = await weather.getForecasts(location, units);
+
 	let fiveDay = forecasts[Object.keys(forecasts)[0]];
 	let current = forecasts[Object.keys(forecasts)[1]];
 

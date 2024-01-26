@@ -7,15 +7,15 @@ async function getLatLong(query) {
 		x = x.trim().replaceAll(" ", "+");
 		finalQuery = `${finalQuery}+${x}`;
 	});
+	setTimeout;
 	const request = await fetch(`https://geocode.maps.co/search?q=${finalQuery.slice(1)}`);
-
 	const response = await request.json();
 	const lat = response[0].lat;
 	const lon = response[0].lon;
 
 	const locRequest = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
 	const locResponse = await locRequest.json();
-	console.log(locResponse);
+
 	const locState = locResponse.address.state;
 	const locCountry = locResponse.address.country;
 	const loc = { locState, locCountry };
@@ -23,8 +23,7 @@ async function getLatLong(query) {
 	return { lat, lon, loc };
 }
 
-async function getWeatherInfo(query, forecast, units = "imperial") {
-	const latLong = await getLatLong(`${query}`);
+async function getWeatherInfo(query, forecast, units = "imperial", latLong) {
 	const request = await fetch(`https://api.openweathermap.org/data/2.5/${forecast}?lat=${latLong.lat}&lon=${latLong.lon}&appid=${oWApi}&units=${units}`);
 
 	let results = await request.json();
@@ -42,13 +41,12 @@ async function getWeatherInfo(query, forecast, units = "imperial") {
 	}
 
 	let loc = latLong.loc;
-
 	return { results, units, loc };
 }
 
 export async function getForecasts(query, units) {
-	const fiveDay = await getWeatherInfo(query, "forecast", units);
-	const current = await getWeatherInfo(query, "weather", units);
-
+	const latLong = await getLatLong(`${query}`);
+	const fiveDay = await getWeatherInfo(query, "forecast", units, latLong);
+	const current = await getWeatherInfo(query, "weather", units, latLong);
 	return { fiveDay, current };
 }
